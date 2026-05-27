@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0b1120;
+  --foreground: #f8fbff;
+  --card: rgba(255, 255, 255, 0.06);
+  --panel: rgba(15, 23, 42, 0.72);
+  --line: rgba(255, 255, 255, 0.1);
+  --muted: rgba(203, 213, 225, 0.7);
+  --accent: #7dd3fc;
+  --font-sans: "Manrope", "Segoe UI", "SF Pro Display", "Inter", sans-serif;
+  --font-display: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(circle at top left, rgba(65, 209, 255, 0.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(139, 124, 255, 0.14), transparent 22%),
+    linear-gradient(180deg, #0b1120 0%, #0f172a 50%, #111827 100%);
+  color: var(--foreground);
+  font-feature-settings: "ss01" on, "cv02" on, "cv03" on;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 84px 84px;
+  mask-image: radial-gradient(circle at center, black 42%, transparent 100%);
+  opacity: 0.28;
+}
+
+@layer base {
+  h1, h2, h3, h4 {
+    @apply tracking-tight text-white;
+    font-family: var(--font-display);
+  }
+
+  p {
+    @apply text-slate-300;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply border border-white/10 bg-white/5 backdrop-blur-2xl shadow-glass;
+  }
+
+  .glass-panel {
+    @apply border border-white/10 bg-slate-950/45 backdrop-blur-2xl shadow-glow;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-white via-cyan to-slate-300 bg-clip-text text-transparent;
+  }
+}
