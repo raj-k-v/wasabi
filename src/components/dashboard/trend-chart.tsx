@@ -12,10 +12,10 @@ import {
   YAxis,
 } from "recharts";
 
-import { chartSeries } from "@/services/mock-data";
 import { Card } from "@/components/ui/card";
+import type { TrendChartsData } from "@/types";
 
-export function TrendCharts() {
+export function TrendCharts({ chartSeries }: { chartSeries: TrendChartsData }) {
   return (
     <div className="grid gap-4 xl:grid-cols-2">
       <ChartCard title="Pricing Trend Graph">

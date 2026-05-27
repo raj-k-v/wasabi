@@ -1,12 +1,7 @@
 import { Card } from "@/components/ui/card";
+ 
 
-const signals = [
-  "OpenAI added 31 platform and GTM roles in the last 14 days.",
-  "Anthropic expanded reliability engineering and product legal coverage.",
-  "Tesla increased applied AI and robotics openings across three regions.",
-];
-
-export function HiringSignals() {
+export function HiringSignals({ signals }: { signals: string[] }) {
   return (
     <Card className="p-6">
       <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Hiring signals</p>

@@ -17,6 +17,15 @@ export interface MetricCard {
   points: number[];
 }
 
+export interface MetricCardViewModel {
+  label: string;
+  value: string;
+  trend: string;
+  trendUp: boolean;
+  iconKey: "alerts" | "companies" | "signals" | "reports";
+  points: number[];
+}
+
 export interface AlertItem {
   id: string;
   company: string;
@@ -37,6 +46,11 @@ export interface MonitoringEvent {
   time: string;
 }
 
+export interface MonitoringStatusItem {
+  label: string;
+  value: string;
+}
+
 export interface CompetitorComparison {
   id: string;
   pair: string;
@@ -46,6 +60,25 @@ export interface CompetitorComparison {
   sentiment: string;
   launches: string;
   insight: string;
+}
+
+export interface CompetitorCardItem {
+  id: string;
+  name: string;
+  industry: string;
+  website: string;
+  riskLevel: Severity;
+  signalsCount: number;
+  lastCheckedAt: string;
+  insight: string;
+}
+
+export interface ComparisonRow {
+  company: string;
+  pricing: string;
+  hiring: string;
+  risk: string;
+  launches: string;
 }
 
 export interface TimelineEvent {
@@ -66,4 +99,16 @@ export interface ReportItem {
 export interface SearchSuggestion {
   name: string;
   category: string;
+}
+
+export interface SignalHighlight {
+  title: string;
+  description: string;
+}
+
+export interface TrendChartsData {
+  pricing: Array<{ name: string; value: number }>;
+  hiring: Array<{ name: string; value: number }>;
+  sentiment: Array<{ name: string; positive: number; neutral: number; negative: number }>;
+  frequency: Array<{ name: string; value: number }>;
 }

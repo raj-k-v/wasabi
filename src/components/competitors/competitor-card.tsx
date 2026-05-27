@@ -1,16 +1,16 @@
 import { Card } from "@/components/ui/card";
-import type { CompetitorComparison } from "@/types";
+import type { CompetitorCardItem } from "@/types";
 
-export function CompetitorCard({ item }: { item: CompetitorComparison }) {
+export function CompetitorCard({ item }: { item: CompetitorCardItem }) {
   return (
     <Card className="p-6">
-      <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{item.focus}</p>
-      <h3 className="mt-3 text-2xl font-semibold">{item.pair}</h3>
+      <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{item.industry}</p>
+      <h3 className="mt-3 text-2xl font-semibold">{item.name}</h3>
       <div className="mt-5 grid gap-3 md:grid-cols-2">
-        <Metric label="Pricing" value={item.pricingDelta} />
-        <Metric label="Hiring" value={item.hiringDelta} />
-        <Metric label="Sentiment" value={item.sentiment} />
-        <Metric label="Launches" value={item.launches} />
+        <Metric label="Risk" value={item.riskLevel} />
+        <Metric label="Signals" value={item.signalsCount.toString()} />
+        <Metric label="Website" value={item.website} />
+        <Metric label="Last checked" value={item.lastCheckedAt} />
       </div>
       <p className="mt-5 text-sm text-slate-300">{item.insight}</p>
     </Card>

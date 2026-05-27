@@ -1,27 +1,40 @@
-from app.services.bright_data_service import BrightDataService
-from app.services.openai_service import OpenAIAnalysisService
+from datetime import datetime, timezone
+
+from app.models import SearchRequest, SearchResponse
+from app.services.brightdata_service import BrightDataService
+from app.services.groq_service import GroqService
 
 
 class IntelligenceAgentService:
     def __init__(
         self,
-        bright_data_service: BrightDataService | None = None,
-        openai_service: OpenAIAnalysisService | None = None,
+        brightdata_service: BrightDataService | None = None,
+        groq_service: GroqService | None = None,
     ) -> None:
-        self.bright_data_service = bright_data_service or BrightDataService()
-        self.openai_service = openai_service or OpenAIAnalysisService()
+        self.brightdata_service = brightdata_service or BrightDataService()
+        self.groq_service = groq_service or GroqService()
 
-    def run_search(self, query: str, company: str | None = None) -> dict:
-        results = self.bright_data_service.search_web(query=query, company=company)
-        structured_signal = self.openai_service.analyze_search_results(
-            query=query,
+    def run_search(self, request: SearchRequest) -> SearchResponse:
+        company = request.company or request.query
+        results = self.brightdata_service.search_company(
             company=company,
-            results=results,
+            query=request.query,
+            max_results=request.max_results,
         )
 
-        return {
-            "query": query,
-            "company": company,
-            "results": results,
-            "structured_signal": structured_signal,
-        }
+        if request.include_page_content:
+            for result in results[:2]:
+                self.brightdata_service.scrape_page(result.url)
+
+        extracted_signals = self.brightdata_service.extract_signals(results)
+        intelligence = self.groq_service.analyze_signals(company, results, extracted_signals)
+
+        return SearchResponse(
+            company=company,
+            query=request.query,
+            summary=intelligence.summary,
+            signals=intelligence.signals,
+            alerts=intelligence.alerts,
+            results=results,
+            generated_at=datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        )

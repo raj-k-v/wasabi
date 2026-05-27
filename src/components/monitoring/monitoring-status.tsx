@@ -1,12 +1,7 @@
 import { Card } from "@/components/ui/card";
+import type { MonitoringStatusItem } from "@/types";
 
-const statuses = [
-  { label: "Active jobs", value: "128" },
-  { label: "Signal confidence", value: "96.2%" },
-  { label: "Crawler health", value: "Healthy" },
-];
-
-export function MonitoringStatus() {
+export function MonitoringStatus({ statuses }: { statuses: MonitoringStatusItem[] }) {
   return (
     <Card className="p-6">
       <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Monitoring status</p>

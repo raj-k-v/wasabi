@@ -1,25 +1,17 @@
 from fastapi import APIRouter
 
-from app.mock_data import MONITORING_TASKS
-from app.models import MonitoringTaskRequest
+from app.models import MonitoringTaskRequest, MonitoringTaskResponse
+from app.services.monitoring_service import MonitoringService
 
 router = APIRouter(prefix="/api", tags=["monitoring"])
+monitoring_service = MonitoringService()
 
 
-@router.get("/monitoring")
-def get_monitoring_tasks():
-    return MONITORING_TASKS
+@router.get("/monitoring", response_model=list[MonitoringTaskResponse])
+def get_monitoring_tasks() -> list[MonitoringTaskResponse]:
+    return monitoring_service.list_tasks()
 
 
-@router.post("/monitoring")
-def create_monitoring_task(request: MonitoringTaskRequest):
-    return {
-        "id": "monitor_new",
-        "company": request.company,
-        "target": request.target,
-        "target_url": request.target_url,
-        "frequency": request.frequency,
-        "status": "active",
-        "last_run_at": None,
-        "message": "Monitoring task created.",
-    }
+@router.post("/monitoring", response_model=MonitoringTaskResponse)
+def create_monitoring_task(request: MonitoringTaskRequest) -> MonitoringTaskResponse:
+    return monitoring_service.create_task(request)

@@ -1,14 +1,56 @@
 import Link from "next/link";
 import { ArrowRight, BrainCircuit, Radar, ShieldCheck, Sparkles, Waves } from "lucide-react";
 
+import { DataStatusBanner } from "@/components/common/data-status-banner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { landingStats, metricCards, showcaseMetrics } from "@/services/mock-data";
+import {
+  getDashboard,
+  getMonitoringTasks,
+  getReports,
+  getSettledValue,
+  toLandingStats,
+  toMetricCards,
+  toShowcaseMetrics,
+} from "@/lib/backend";
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const [dashboardResult, monitoringResult, reportsResult] = await Promise.allSettled([
+    getDashboard(),
+    getMonitoringTasks(),
+    getReports(),
+  ]);
+
+  const dashboard = getSettledValue(dashboardResult, {
+    stats: {
+      monitored_companies: 0,
+      active_alerts: 0,
+      signals_detected: 0,
+      reports_generated: 0,
+    },
+    recent_signals: [],
+    recent_activity: [],
+  });
+  const monitoringTasks = getSettledValue(monitoringResult, []);
+  const reports = getSettledValue(reportsResult, []);
+  const landingStats = toLandingStats(dashboard);
+  const metricCards = toMetricCards(dashboard.stats);
+  const showcaseMetrics = toShowcaseMetrics(dashboard, monitoringTasks);
+  const leadSignal = dashboard.recent_signals[0];
+  const leadReport = reports[0];
+  const backendDegraded =
+    dashboardResult.status === "rejected" ||
+    monitoringResult.status === "rejected" ||
+    reportsResult.status === "rejected";
+
   return (
     <main className="overflow-hidden">
       <section className="relative mx-auto max-w-[1480px] px-4 pb-20 pt-6 sm:px-6 xl:px-8">
+        {backendDegraded ? (
+          <div className="mb-6">
+            <DataStatusBanner message="Live backend preview data is unavailable right now, so this page is showing safe fallback values." />
+          </div>
+        ) : null}
         <div className="glass-panel flex items-center justify-between rounded-[28px] px-5 py-4">
           <div>
             <p className="text-lg text-white" style={{ fontFamily: "var(--font-display)" }}>SignalOS</p>
@@ -63,7 +105,7 @@ export default function LandingPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-slate-400">Live Dashboard Preview</p>
-                    <h2 className="mt-2 text-2xl font-semibold">Signal convergence detected</h2>
+                    <h2 className="mt-2 text-2xl font-semibold">{leadSignal?.summary ?? "Signal convergence detected"}</h2>
                   </div>
                   <BrainCircuit className="h-6 w-6 text-cyan-200" />
                 </div>
@@ -79,13 +121,17 @@ export default function LandingPage() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <Card className="p-5">
                   <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Monitoring</p>
-                  <p className="mt-3 text-lg font-semibold">Tesla pricing page changed</p>
-                  <p className="mt-2 text-sm text-slate-400">Enterprise seat packaging updated 2 minutes ago.</p>
+                  <p className="mt-3 text-lg font-semibold">{dashboard.recent_activity[0]?.message ?? "Live monitoring active"}</p>
+                  <p className="mt-2 text-sm text-slate-400">
+                    {monitoringTasks[0]
+                      ? `${monitoringTasks[0].company} is being checked on a ${monitoringTasks[0].frequency.replaceAll("_", " ")} cadence.`
+                      : "Monitoring tasks will appear here once the backend is running."}
+                  </p>
                 </Card>
                 <Card className="p-5">
                   <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Hiring trend</p>
-                  <p className="mt-3 text-lg font-semibold">OpenAI GTM roles +40%</p>
-                  <p className="mt-2 text-sm text-slate-400">Signals point to expansion into larger enterprise motions.</p>
+                  <p className="mt-3 text-lg font-semibold">{leadReport?.title ?? "AI-generated market brief"}</p>
+                  <p className="mt-2 text-sm text-slate-400">{leadReport?.summary ?? "Backend reports will show up here once they are generated."}</p>
                 </Card>
               </div>
             </div>
@@ -133,7 +179,7 @@ export default function LandingPage() {
               {showcaseMetrics.map((item) => (
                 <div key={item.label} className="flex items-center justify-between rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-4">
                   <div className="flex items-center gap-3">
-                    <item.icon className="h-4 w-4 text-cyan-200" />
+                    <Waves className="h-4 w-4 text-cyan-200" />
                     <span className="text-sm text-slate-300">{item.label}</span>
                   </div>
                   <span className="text-sm font-medium text-white">{item.value}</span>
@@ -146,18 +192,20 @@ export default function LandingPage() {
             <div className="mt-5 grid gap-4 md:grid-cols-2">
               <div className="rounded-[24px] border border-white/8 bg-white/[0.03] p-5">
                 <p className="text-sm text-slate-400">AI summary</p>
-                <p className="mt-3 text-lg font-semibold text-white">Tesla increased AI hiring by 40%</p>
-                <p className="mt-2 text-sm text-slate-400">Paired with enterprise pricing changes, this suggests broader commercial expansion.</p>
+                <p className="mt-3 text-lg font-semibold text-white">{leadSignal?.company ?? "Autonomous signal stream"}</p>
+                <p className="mt-2 text-sm text-slate-400">{leadSignal?.summary ?? "Fresh backend intelligence will appear here."}</p>
               </div>
               <div className="rounded-[24px] border border-white/8 bg-white/[0.03] p-5">
                 <p className="text-sm text-slate-400">Competitor intelligence</p>
-                <p className="mt-3 text-lg font-semibold text-white">OpenAI vs Anthropic</p>
-                <p className="mt-2 text-sm text-slate-400">Hiring and launch signals imply different strategic priorities across the market.</p>
+                <p className="mt-3 text-lg font-semibold text-white">{leadReport?.title ?? "AI-generated competitor brief"}</p>
+                <p className="mt-2 text-sm text-slate-400">{leadReport?.summary ?? "Generate reports from the platform to preview them here."}</p>
               </div>
               <div className="rounded-[24px] border border-white/8 bg-white/[0.03] p-5 md:col-span-2">
                 <p className="text-sm text-slate-400">Live monitoring feed</p>
                 <div className="mt-4 space-y-3">
-                  {["Searching Tesla...", "Scraping pricing page...", "Analyzing hiring trends...", "Signal detected..."].map((line) => (
+                  {(dashboard.recent_activity.length > 0
+                    ? dashboard.recent_activity.map((item) => item.message)
+                    : ["Backend online", "Monitoring tasks syncing", "Reports ready", "Signals waiting"]).map((line) => (
                     <div key={line} className="flex items-center gap-3 text-sm text-slate-300">
                       <Waves className="h-4 w-4 animate-pulse-soft text-cyan-200" />
                       {line}

@@ -1,12 +1,30 @@
 import { SearchBar } from "@/components/dashboard/search-bar";
 import { CompetitorCard } from "@/components/competitors/competitor-card";
+import { LiveSearchResults } from "@/components/search/live-search-results";
 import { Card } from "@/components/ui/card";
-import { competitors, suggestions } from "@/services/mock-data";
+import {
+  getCompetitors,
+  getSettledValue,
+  toCompetitorCards,
+  toSearchSuggestions,
+} from "@/lib/backend";
 
-export default function SearchPage() {
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ q?: string }>;
+}) {
+  const params = (await searchParams) ?? {};
+  const query = params.q?.trim() ?? "";
+
+  const [competitorsResult] = await Promise.allSettled([getCompetitors()]);
+
+  const competitors = toCompetitorCards(getSettledValue(competitorsResult, []));
+  const suggestions = toSearchSuggestions(getSettledValue(competitorsResult, []));
+
   return (
     <div className="space-y-6">
-      <SearchBar />
+      <SearchBar defaultValue={query} suggestions={suggestions} />
       <div className="grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
         <Card className="p-6">
           <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Search intelligence</p>
@@ -21,6 +39,7 @@ export default function SearchPage() {
           </div>
         </Card>
         <div className="space-y-6">
+          <LiveSearchResults query={query} />
           {competitors.map((item) => (
             <CompetitorCard key={item.id} item={item} />
           ))}

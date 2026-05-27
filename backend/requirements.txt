@@ -1,3 +1,7 @@
 fastapi
 uvicorn[standard]
+groq
+requests
+httpx
 python-dotenv
+pydantic

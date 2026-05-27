@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
-import { timeline } from "@/services/mock-data";
+import type { TimelineEvent } from "@/types";
 
-export function CompetitorTimeline() {
+export function CompetitorTimeline({ timeline }: { timeline: TimelineEvent[] }) {
   return (
     <Card className="p-6">
       <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Timeline</p>

@@ -1,9 +1,12 @@
 node_modules/
 .env
+backend/.env
+backend/.env.local
 dist/
 build/
 .next/
 build.log
+backend/uvicorn*.log
 *.tsbuildinfo
 __pycache__/
 *.pyc

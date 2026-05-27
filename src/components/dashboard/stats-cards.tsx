@@ -1,15 +1,25 @@
 "use client";
 
+import { BellRing, BrainCircuit, Building2, Radar } from "lucide-react";
 import { Area, AreaChart, ResponsiveContainer } from "recharts";
 import { motion } from "framer-motion";
 
-import { metricCards } from "@/services/mock-data";
 import { Card } from "@/components/ui/card";
+import type { MetricCardViewModel } from "@/types";
 
-export function StatsCards() {
+const statIconMap = {
+  alerts: BellRing,
+  companies: Building2,
+  signals: Radar,
+  reports: BrainCircuit,
+};
+
+export function StatsCards({ cards }: { cards: MetricCardViewModel[] }) {
   return (
     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-      {metricCards.map((card, index) => (
+      {cards.map((card, index) => {
+        const Icon = statIconMap[card.iconKey];
+        return (
         <motion.div
           key={card.label}
           initial={{ opacity: 0, y: 18 }}
@@ -23,7 +33,7 @@ export function StatsCards() {
                 <p className="mt-3 text-3xl font-semibold text-white">{card.value}</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                <card.icon className="h-5 w-5 text-cyan-200" />
+                <Icon className="h-5 w-5 text-cyan-200" />
               </div>
             </div>
             <div className="mt-3 flex items-center justify-between">
@@ -50,7 +60,7 @@ export function StatsCards() {
             </div>
           </Card>
         </motion.div>
-      ))}
+      )})}
     </div>
   );
 }

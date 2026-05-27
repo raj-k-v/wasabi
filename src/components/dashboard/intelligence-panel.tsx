@@ -7,7 +7,13 @@ import { BrainCircuit, ChevronDown } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-export function IntelligencePanel() {
+export function IntelligencePanel({
+  title,
+  paragraphs,
+}: {
+  title: string;
+  paragraphs: string[];
+}) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -21,7 +27,7 @@ export function IntelligencePanel() {
             </div>
             <div>
               <p className="text-xs uppercase tracking-[0.22em] text-slate-400">AI summary</p>
-              <h2 className="mt-2 text-2xl font-semibold">Autonomous briefing</h2>
+              <h2 className="mt-2 text-2xl font-semibold">{title}</h2>
             </div>
           </div>
           <Button variant="ghost" onClick={() => setExpanded((value) => !value)}>
@@ -33,15 +39,9 @@ export function IntelligencePanel() {
           className="overflow-hidden"
         >
           <div className="mt-5 space-y-4 text-[15px] leading-7 text-slate-200">
-            <p>## Market Pulse</p>
-            <p>
-              Tesla increased AI hiring by <span className="text-cyan-200">40%</span> and launched new enterprise pricing.
-              OpenAI is expanding GTM infrastructure while Anthropic continues to reinforce reliability signals.
-            </p>
-            <p>
-              The strongest intelligence convergence is between pricing copy changes and workforce expansion, indicating
-              operational readiness rather than isolated experimentation.
-            </p>
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
         </motion.div>
       </div>

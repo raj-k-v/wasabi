@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
-import { timeline } from "@/services/mock-data";
+import type { TimelineEvent } from "@/types";
 
-export function ActivityTimeline() {
+export function ActivityTimeline({ timeline }: { timeline: TimelineEvent[] }) {
   return (
     <Card className="p-6">
       <div>

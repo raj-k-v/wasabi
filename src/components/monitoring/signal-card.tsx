@@ -1,8 +1,9 @@
 import { Sparkles } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import type { SignalHighlight } from "@/types";
 
-export function SignalCard() {
+export function SignalCard({ signal }: { signal: SignalHighlight }) {
   return (
     <Card className="p-6">
       <div className="flex items-start gap-4">
@@ -11,8 +12,8 @@ export function SignalCard() {
         </div>
         <div>
           <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Signal stream</p>
-          <h3 className="mt-2 text-xl font-semibold">High-confidence event</h3>
-          <p className="mt-3 text-sm text-slate-300">Detected synchronized pricing copy changes and new sales hiring patterns across two enterprise product surfaces.</p>
+          <h3 className="mt-2 text-xl font-semibold">{signal.title}</h3>
+          <p className="mt-3 text-sm text-slate-300">{signal.description}</p>
         </div>
       </div>
     </Card>

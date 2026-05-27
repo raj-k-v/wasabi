@@ -2,14 +2,13 @@
 
 import { Bell, Dot } from "lucide-react";
 
-import { alerts } from "@/services/mock-data";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { useIntelligenceStore } from "@/store/intelligence-store";
 
 export function NotificationsDropdown() {
-  const { notifications, dismissNotification } = useIntelligenceStore();
+  const { notifications, dismissNotification, alerts } = useIntelligenceStore();
 
   return (
     <div className="group relative">

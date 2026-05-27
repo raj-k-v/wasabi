@@ -4,12 +4,12 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Command, SearchIcon } from "lucide-react";
 import Link from "next/link";
 
-import { suggestions } from "@/services/mock-data";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useUIStore } from "@/store/ui-store";
+import type { SearchSuggestion } from "@/types";
 
-export function CommandPalette() {
+export function CommandPalette({ suggestions }: { suggestions: SearchSuggestion[] }) {
   const { commandPaletteOpen, toggleCommandPalette, setSelectedCompany } = useUIStore();
   const [query, setQuery] = useState("");
 
@@ -27,7 +27,7 @@ export function CommandPalette() {
   const filtered = useMemo(() => {
     if (!query) return suggestions;
     return suggestions.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
-  }, [query]);
+  }, [query, suggestions]);
 
   return (
     <Dialog open={commandPaletteOpen} onOpenChange={toggleCommandPalette}>
