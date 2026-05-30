@@ -14,14 +14,18 @@ export function DashboardLayout({
   suggestions: SearchSuggestion[];
 }) {
   return (
-    <div className="mx-auto flex min-h-screen max-w-[1600px] gap-6 px-4 py-6 sm:px-6 xl:px-8">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <MobileSidebar />
       <CommandPalette suggestions={suggestions} />
-      <main className="min-w-0 flex-1">
+      <div className="flex flex-1 flex-col overflow-hidden">
         <Navbar />
-        <div className="pt-6">{children}</div>
-      </main>
+        <main className="flex-1 overflow-y-auto px-6 py-8">
+          <div className="mx-auto max-w-[1400px]">
+            {children}
+          </div>
+        </main>
+      </div>
     </div>
   );
 }

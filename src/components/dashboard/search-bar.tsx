@@ -30,36 +30,54 @@ export function SearchBar({
     router.push(`/search?q=${encodeURIComponent(nextQuery)}`);
   };
 
+  const filteredSuggestions = query 
+    ? suggestions.filter(s => s.name.toLowerCase().includes(query.toLowerCase())).slice(0, 5)
+    : suggestions.slice(0, 5);
+
   return (
     <div className="relative">
-      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan/20 to-violet/10 blur-2xl" />
-      <div className="relative rounded-full border border-white/10 bg-white/5 p-2 backdrop-blur-xl">
-        <form onSubmit={onSubmit} className="flex items-center gap-3 rounded-full border border-white/10 bg-slate-950/40 px-4 py-3">
-          <SearchIcon className="h-4 w-4 text-cyan-200" />
+      <div className="relative flex items-center gap-3 rounded-lg border border-slate-800 bg-slate-900 px-4 py-1 transition-all focus-within:border-teal-500/30">
+        <SearchIcon className="h-4 w-4 text-slate-500" />
+        <form onSubmit={onSubmit} className="flex-1">
           <Input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search companies, competitors, markets..."
+            placeholder="Search assets, markers, data..."
             onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            className="border-0 bg-transparent px-0 focus:shadow-none"
+            onBlur={() => setTimeout(() => setFocused(false), 200)}
+            className="h-10 border-0 bg-transparent px-0 text-sm text-white placeholder:text-slate-500 shadow-none focus:ring-0 focus-visible:ring-0"
           />
-          <Sparkles className={`h-4 w-4 transition ${focused ? "text-cyan-200" : "text-slate-500"}`} />
         </form>
+        <Sparkles className={`h-3.5 w-3.5 transition-colors ${focused ? "text-teal-400" : "text-slate-600"}`} />
       </div>
-      {focused ? (
-        <Card className="absolute left-0 right-0 top-[calc(100%+0.75rem)] z-20 p-3">
-          <p className="px-2 pb-2 text-xs uppercase tracking-[0.2em] text-slate-400">Suggestions</p>
-          <div className="space-y-2">
-            {suggestions.slice(0, 4).map((item) => (
-              <div key={item.name} className="flex items-center justify-between rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-3">
-                <span className="font-medium text-white">{item.name}</span>
-                <span className="text-sm text-slate-400">{item.category}</span>
-              </div>
+      
+      {focused && filteredSuggestions.length > 0 && (
+        <Card className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-50 overflow-hidden border border-slate-200 bg-white p-1 shadow-2xl">
+          <div className="px-3 py-2">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Live Suggestions</p>
+          </div>
+          <div className="space-y-0.5">
+            {filteredSuggestions.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => {
+                  setQuery(item.name);
+                  router.push(`/search?q=${encodeURIComponent(item.name)}`);
+                }}
+                className="flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm transition-colors hover:bg-slate-50"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="h-1.5 w-1.5 rounded-full bg-teal-500" />
+                  <span className="font-semibold text-slate-900">{item.name}</span>
+                </div>
+                <span className="text-xs text-slate-400">{item.category}</span>
+              </button>
             ))}
           </div>
         </Card>
-      ) : null}
+      )}
     </div>
   );
 }
+
+

@@ -14,59 +14,54 @@ import {
 
 import { Card } from "@/components/ui/card";
 import type { TrendChartsData } from "@/types";
+import { cn } from "@/lib/utils";
 
 export function TrendCharts({ chartSeries }: { chartSeries: TrendChartsData }) {
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
-      <ChartCard title="Pricing Trend Graph">
+    <div className="grid gap-6 xl:grid-cols-2">
+      <ChartCard title="Pricing Trends">
         <ResponsiveContainer width="100%" height={220}>
           <AreaChart data={chartSeries.pricing}>
-            <defs>
-              <linearGradient id="pricingFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#41d1ff" stopOpacity={0.4} />
-                <stop offset="100%" stopColor="#41d1ff" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
-            <XAxis dataKey="name" stroke="#94a3b8" tickLine={false} axisLine={false} />
-            <YAxis stroke="#94a3b8" tickLine={false} axisLine={false} />
-            <Tooltip contentStyle={{ background: "#091120", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }} />
-            <Area type="monotone" dataKey="value" stroke="#41d1ff" fill="url(#pricingFill)" strokeWidth={3} />
+            <CartesianGrid stroke="#f3f4f6" vertical={false} />
+            <XAxis dataKey="name" stroke="#9ca3af" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+            <YAxis stroke="#9ca3af" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+            <Tooltip contentStyle={{ background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: 8, boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)" }} />
+            <Area type="monotone" dataKey="value" stroke="#0d9488" fill="#0d9488" fillOpacity={0.05} strokeWidth={2} />
           </AreaChart>
         </ResponsiveContainer>
       </ChartCard>
-      <ChartCard title="Hiring Activity Chart">
+      <ChartCard title="Hiring Activity">
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={chartSeries.hiring}>
-            <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
-            <XAxis dataKey="name" stroke="#94a3b8" tickLine={false} axisLine={false} />
-            <YAxis stroke="#94a3b8" tickLine={false} axisLine={false} />
-            <Tooltip contentStyle={{ background: "#091120", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }} />
-            <Bar dataKey="value" fill="#8b7cff" radius={[10, 10, 0, 0]} />
+            <CartesianGrid stroke="#f3f4f6" vertical={false} />
+            <XAxis dataKey="name" stroke="#9ca3af" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+            <YAxis stroke="#9ca3af" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+            <Tooltip cursor={{ fill: "#f9fafb" }} contentStyle={{ background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: 8 }} />
+            <Bar dataKey="value" fill="#0d9488" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </ChartCard>
-      <ChartCard title="Sentiment Analysis Chart">
+      <ChartCard title="Market Sentiment">
         <ResponsiveContainer width="100%" height={220}>
           <AreaChart data={chartSeries.sentiment}>
-            <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
-            <XAxis dataKey="name" stroke="#94a3b8" tickLine={false} axisLine={false} />
-            <YAxis stroke="#94a3b8" tickLine={false} axisLine={false} />
-            <Tooltip contentStyle={{ background: "#091120", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }} />
-            <Area type="monotone" dataKey="positive" stackId="1" stroke="#41d1ff" fill="#41d1ff66" />
-            <Area type="monotone" dataKey="neutral" stackId="1" stroke="#cbd5e1" fill="#cbd5e133" />
-            <Area type="monotone" dataKey="negative" stackId="1" stroke="#fb7185" fill="#fb718544" />
+            <CartesianGrid stroke="#f3f4f6" vertical={false} />
+            <XAxis dataKey="name" stroke="#9ca3af" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+            <YAxis stroke="#9ca3af" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+            <Tooltip contentStyle={{ background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: 8 }} />
+            <Area type="monotone" dataKey="positive" stackId="1" stroke="#0d9488" fill="#0d9488" fillOpacity={0.1} />
+            <Area type="monotone" dataKey="neutral" stackId="1" stroke="#94a3b8" fill="#94a3b8" fillOpacity={0.05} />
+            <Area type="monotone" dataKey="negative" stackId="1" stroke="#e11d48" fill="#e11d48" fillOpacity={0.05} />
           </AreaChart>
         </ResponsiveContainer>
       </ChartCard>
-      <ChartCard title="Alerts Frequency Graph">
+      <ChartCard title="Alert Volume">
         <ResponsiveContainer width="100%" height={220}>
           <AreaChart data={chartSeries.frequency}>
-            <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
-            <XAxis dataKey="name" stroke="#94a3b8" tickLine={false} axisLine={false} />
-            <YAxis stroke="#94a3b8" tickLine={false} axisLine={false} />
-            <Tooltip contentStyle={{ background: "#091120", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16 }} />
-            <Area type="monotone" dataKey="value" stroke="#7dd3fc" fill="#7dd3fc33" strokeWidth={3} />
+            <CartesianGrid stroke="#f3f4f6" vertical={false} />
+            <XAxis dataKey="name" stroke="#9ca3af" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+            <YAxis stroke="#9ca3af" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+            <Tooltip contentStyle={{ background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: 8 }} />
+            <Area type="monotone" dataKey="value" stroke="#0d9488" fill="#0d9488" fillOpacity={0.05} strokeWidth={2} />
           </AreaChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -77,11 +72,12 @@ export function TrendCharts({ chartSeries }: { chartSeries: TrendChartsData }) {
 function ChartCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <Card className="p-6">
-      <div className="mb-5">
-        <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Trends</p>
-        <h3 className="mt-2 text-xl font-semibold">{title}</h3>
+      <div className="mb-6 flex items-center justify-between">
+        <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
+        <span className="text-[10px] font-medium uppercase tracking-wider text-gray-400">Last 30 Days</span>
       </div>
       {children}
     </Card>
   );
 }
+

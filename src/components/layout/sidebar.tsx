@@ -11,17 +11,15 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="glass-panel sticky top-6 hidden h-[calc(100vh-3rem)] w-72 flex-col rounded-[32px] p-5 lg:flex">
-      <Link href="/" className="flex items-center gap-3 px-2 py-3">
-        <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-cyan/30 to-violet/30 p-3">
-          <Sparkles className="h-5 w-5 text-white" />
+    <aside className="sticky top-6 hidden h-[calc(100vh-3rem)] w-64 flex-col border-r border-gray-200 bg-white/50 lg:flex">
+      <Link href="/" className="mb-8 flex items-center gap-2 px-4 py-6">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600 text-white">
+          <Sparkles className="h-5 w-5" />
         </div>
-        <div>
-          <p className="text-sm font-medium text-slate-300">Wasabi Intelligence</p>
-          <p className="text-xl font-semibold tracking-tight text-white">SignalOS</p>
-        </div>
+        <span className="text-xl font-bold tracking-tight text-gray-900">Wasabi</span>
       </Link>
-      <nav className="mt-8 flex flex-1 flex-col gap-2">
+      
+      <nav className="flex flex-1 flex-col gap-1 px-2">
         {navItems.map((item) => {
           const active = pathname === item.href;
           return (
@@ -29,22 +27,28 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-2xl px-4 py-3 text-sm transition",
+                "group flex items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors",
                 active
-                  ? "bg-white/10 text-white shadow-glow"
-                  : "text-slate-400 hover:bg-white/5 hover:text-white",
+                  ? "bg-teal-50 text-teal-700"
+                  : "text-gray-500 hover:bg-gray-100 hover:text-gray-900",
               )}
             >
-              <item.icon className="h-4 w-4" />
+              <item.icon className={cn("h-4 w-4", active ? "text-teal-600" : "text-gray-400 group-hover:text-gray-600")} />
               {item.title}
             </Link>
           );
         })}
       </nav>
-      <div className="glass rounded-[28px] p-4">
-        <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Live agents</p>
-        <p className="mt-3 text-sm text-slate-200">12 autonomous crawlers are monitoring pricing, talent, and launch signals.</p>
+
+      <div className="p-4">
+        <div className="rounded-xl border border-gray-100 bg-gray-50 p-4">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Status</p>
+          <p className="mt-2 text-xs leading-relaxed text-gray-600">
+            Agents active. Monitoring market signals across 12 sectors.
+          </p>
+        </div>
       </div>
     </aside>
   );
 }
+

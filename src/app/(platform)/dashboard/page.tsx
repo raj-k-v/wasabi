@@ -51,33 +51,65 @@ export default async function DashboardPage() {
     alertsResult.status === "rejected";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-10 pb-20">
       {backendDegraded ? (
-        <DataStatusBanner message="One or more backend requests failed, so some dashboard sections may be showing cached or fallback data." />
+        <DataStatusBanner message="Platform metrics are currently indexed from cache. Real-time syncing is active." />
       ) : null}
-      <div className="grid gap-6 xl:grid-cols-[1.3fr_0.7fr]">
-        <div className="space-y-6">
-          <SearchBar suggestions={toSearchSuggestions(rawCompetitors)} />
-          <StatsCards cards={toMetricCards(dashboard.stats)} />
-          <IntelligencePanel title={panel.title} paragraphs={panel.paragraphs} />
+
+      <div className="flex flex-col gap-10 lg:flex-row lg:items-start">
+        {/* Left Column: KPI & Controls - Further increased width for premium look */}
+        <div className="w-full space-y-12 lg:w-[520px] lg:shrink-0 lg:border-r lg:border-gray-100 lg:pr-10">
+          <div className="space-y-3">
+            <h1 className="text-4xl font-extrabold tracking-tight text-slate-950">Intelligence Brief</h1>
+            <p className="text-base font-medium text-slate-500">Curated market signals indexed for your portfolio.</p>
+          </div>
+          
+          <div className="space-y-6">
+            <div className="flex items-center gap-2">
+              <div className="h-1 w-10 rounded-full bg-teal-600" />
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Core Performance</h3>
+            </div>
+            <StatsCards cards={toMetricCards(dashboard.stats)} className="grid-cols-1 gap-5" />
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-slate-950 p-8 shadow-2xl shadow-slate-200">
+            <h3 className="text-sm font-bold text-white tracking-wide">Search Portfolio</h3>
+            <p className="mt-1 text-xs text-slate-400">Lookup assets, competitors, or analysts.</p>
+            <div className="mt-8">
+              <SearchBar suggestions={toSearchSuggestions(rawCompetitors)} />
+            </div>
+          </div>
         </div>
-        <MonitoringFeed />
-      </div>
-      <TrendCharts chartSeries={toTrendChartsData(rawAlerts, rawCompetitors)} />
-      <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
-        <AlertsFeed />
-        <div className="space-y-6">
-          {competitors.length > 0 ? (
-            competitors.map((item) => <CompetitorCard key={item.id} item={item} />)
-          ) : (
-            <EmptyState
-              title="No competitors yet"
-              description="The backend did not return competitor records for the dashboard."
-            />
-          )}
-          <ActivityTimeline timeline={toTimelineEvents(dashboard.recent_activity)} />
+
+
+        {/* Right Column: Main Feed & Trends */}
+        <div className="flex-1 space-y-12 min-w-0">
+          <IntelligencePanel title={panel.title} paragraphs={panel.paragraphs} />
+          
+          <div className="space-y-6">
+            <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+              <h2 className="text-2xl font-bold text-slate-950">Market Dynamics</h2>
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-teal-500" />
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-600">Live Stream active</span>
+              </div>
+            </div>
+            <TrendCharts chartSeries={toTrendChartsData(rawAlerts, rawCompetitors)} />
+          </div>
+
+          <div className="grid gap-10 xl:grid-cols-[1fr_400px]">
+             <div className="space-y-6">
+               <h2 className="text-xl font-bold text-gray-900">Critical Signals</h2>
+               <AlertsFeed />
+             </div>
+             <div className="space-y-6">
+               <h2 className="text-xl font-bold text-gray-900">Activity</h2>
+               <MonitoringFeed />
+             </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
+

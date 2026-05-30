@@ -44,206 +44,116 @@ export default async function LandingPage() {
     reportsResult.status === "rejected";
 
   return (
-    <main className="overflow-hidden">
-      <section className="relative mx-auto max-w-[1480px] px-4 pb-20 pt-6 sm:px-6 xl:px-8">
-        {backendDegraded ? (
-          <div className="mb-6">
-            <DataStatusBanner message="Live backend preview data is unavailable right now, so this page is showing safe fallback values." />
+    <main className="min-h-screen bg-white">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-8">
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600 text-white">
+            <Sparkles className="h-5 w-5" />
           </div>
-        ) : null}
-        <div className="glass-panel flex items-center justify-between rounded-[28px] px-5 py-4">
-          <div>
-            <p className="text-lg text-white" style={{ fontFamily: "var(--font-display)" }}>SignalOS</p>
+          <span className="text-xl font-bold tracking-tight text-gray-900">Wasabi</span>
+        </div>
+        <div className="hidden items-center gap-8 text-sm font-medium text-gray-500 md:flex">
+          <a href="#platform" className="hover:text-gray-900">Platform</a>
+          <a href="#intelligence" className="hover:text-gray-900">Intelligence</a>
+          <a href="#teams" className="hover:text-gray-900">Teams</a>
+        </div>
+        <Link href="/dashboard">
+          <Button variant="secondary" size="sm">Log In</Button>
+        </Link>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="max-w-3xl">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-teal-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-teal-700">
+            Market Intelligence for Enterprise
           </div>
-          <div className="hidden items-center gap-8 text-sm text-slate-300 md:flex">
-            <a href="#features">Features</a>
-            <a href="#platform">Platform</a>
-            <a href="#intelligence">Intelligence</a>
+          <h1 className="text-5xl font-bold leading-[1.1] text-gray-900 md:text-7xl">
+            Autonomous web intelligence <br />
+            <span className="text-teal-600">for the live market.</span>
+          </h1>
+          <p className="mt-8 text-lg text-gray-500 leading-relaxed max-w-2xl">
+            Monitor pricing, hiring, and strategic market signals in real time. 
+            Designed for investors and leadership teams who require a high-signal edge.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link href="/dashboard">
+              <Button size="lg" className="cta-shadow">Open Dashboard</Button>
+            </Link>
+            <Button variant="secondary" size="lg">Request Access</Button>
           </div>
-          <Link href="/dashboard">
-            <Button variant="secondary" size="sm">Enter Platform</Button>
-          </Link>
         </div>
 
-        <div className="relative grid gap-10 pb-12 pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.22em] text-slate-300">
-              <Sparkles className="h-3.5 w-3.5 text-cyan-200" />
-              AI-powered web intelligence
+        <div className="mt-24 grid gap-8 sm:grid-cols-3">
+          {landingStats.map((item) => (
+            <div key={item.label} className="border-l border-gray-100 pl-8 py-2">
+              <p className="text-4xl font-bold text-gray-900">{item.value}</p>
+              <p className="mt-2 text-sm font-medium text-gray-400 uppercase tracking-widest">{item.label}</p>
             </div>
-            <h1 className="max-w-4xl text-5xl leading-none sm:text-6xl lg:text-7xl">
-              <span className="gradient-text">Autonomous AI Intelligence</span>
-              <br />
-              <span className="text-white">For The Live Web</span>
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-              Monitor competitors, pricing, hiring, and market signals in real time using AI-powered web intelligence.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/dashboard">
-                <Button size="lg">Get Started</Button>
-              </Link>
-              <Button variant="secondary" size="lg">
-                Live Demo
-              </Button>
-            </div>
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              {landingStats.map((item) => (
-                <div key={item.label} className="glass rounded-[24px] p-4">
-                  <p className="text-2xl font-semibold text-white">{item.value}</p>
-                  <p className="mt-2 text-sm text-slate-400">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="absolute -left-10 top-10 h-40 w-40 rounded-full bg-cyan/20 blur-3xl" />
-            <div className="absolute -right-8 bottom-10 h-44 w-44 rounded-full bg-violet/20 blur-3xl" />
-            <div className="relative space-y-4">
-              <Card className="animate-float p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-slate-400">Live Dashboard Preview</p>
-                    <h2 className="mt-2 text-2xl font-semibold">{leadSignal?.summary ?? "Signal convergence detected"}</h2>
-                  </div>
-                  <BrainCircuit className="h-6 w-6 text-cyan-200" />
-                </div>
-                <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                  {metricCards.slice(0, 4).map((card) => (
-                    <div key={card.label} className="rounded-[22px] border border-white/10 bg-white/[0.03] p-4">
-                      <p className="text-sm text-slate-400">{card.label}</p>
-                      <p className="mt-2 text-2xl font-semibold text-white">{card.value}</p>
-                    </div>
-                  ))}
-                </div>
-              </Card>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <Card className="p-5">
-                  <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Monitoring</p>
-                  <p className="mt-3 text-lg font-semibold">{dashboard.recent_activity[0]?.message ?? "Live monitoring active"}</p>
-                  <p className="mt-2 text-sm text-slate-400">
-                    {monitoringTasks[0]
-                      ? `${monitoringTasks[0].company} is being checked on a ${monitoringTasks[0].frequency.replaceAll("_", " ")} cadence.`
-                      : "Monitoring tasks will appear here once the backend is running."}
-                  </p>
-                </Card>
-                <Card className="p-5">
-                  <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Hiring trend</p>
-                  <p className="mt-3 text-lg font-semibold">{leadReport?.title ?? "AI-generated market brief"}</p>
-                  <p className="mt-2 text-sm text-slate-400">{leadReport?.summary ?? "Backend reports will show up here once they are generated."}</p>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="features" className="mx-auto max-w-[1480px] px-4 py-10 sm:px-6 xl:px-8">
-        <div className="grid gap-4 lg:grid-cols-3">
-          {[
-            {
-              icon: Radar,
-              title: "Live monitoring",
-              description: "Continuously scan pricing pages, hiring portals, release notes, and media surfaces.",
-            },
-            {
-              icon: BrainCircuit,
-              title: "AI synthesis",
-              description: "Turn fragmented web changes into concise executive intelligence with context.",
-            },
-            {
-              icon: ShieldCheck,
-              title: "Enterprise-grade clarity",
-              description: "Calm, high-signal views designed for operators, strategists, and leadership teams.",
-            },
-          ].map((feature) => (
-            <Card key={feature.title} className="p-6">
-              <feature.icon className="h-6 w-6 text-cyan-200" />
-              <h3 className="mt-5 text-2xl font-semibold">{feature.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-slate-300">{feature.description}</p>
-            </Card>
           ))}
         </div>
       </section>
 
-      <section id="platform" className="mx-auto max-w-[1480px] px-4 py-14 sm:px-6 xl:px-8">
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <Card className="p-8">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-400">AI monitoring explained</p>
-            <h2 className="mt-3 text-4xl">A command center for the live web</h2>
-            <p className="mt-4 max-w-xl text-base leading-8 text-slate-300">
-              Agents observe structured and unstructured changes, rank relevance, generate summaries, and route signals into a single premium intelligence workspace.
-            </p>
-            <div className="mt-8 space-y-3">
-              {showcaseMetrics.map((item) => (
-                <div key={item.label} className="flex items-center justify-between rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-4">
-                  <div className="flex items-center gap-3">
-                    <Waves className="h-4 w-4 text-cyan-200" />
-                    <span className="text-sm text-slate-300">{item.label}</span>
+      {/* Feature Section */}
+      <section id="platform" className="border-t border-gray-100 bg-gray-50/50 py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900">High-leverage market monitoring.</h2>
+              <p className="mt-4 text-gray-500 leading-relaxed">
+                Agents observe structured and unstructured changes, rank relevance, and route signals into a single premium intelligence workspace.
+              </p>
+              <div className="mt-10 space-y-6">
+                {[
+                  { title: "Live Signal Capture", desc: "Real-time indexing of pricing, talent, and release notes." },
+                  { title: "AI Synthesis", desc: "Fragments are unified into concise executive briefs." },
+                  { title: "Strategic Clarity", desc: "Calm, high-signal views designed for leadership." }
+                ].map((feature) => (
+                  <div key={feature.title} className="flex gap-4">
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-teal-100 text-teal-600">
+                      <Waves className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-gray-900">{feature.title}</h3>
+                      <p className="text-sm text-gray-500">{feature.desc}</p>
+                    </div>
                   </div>
-                  <span className="text-sm font-medium text-white">{item.value}</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </Card>
-          <Card className="p-8">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Dashboard preview</p>
-            <div className="mt-5 grid gap-4 md:grid-cols-2">
-              <div className="rounded-[24px] border border-white/8 bg-white/[0.03] p-5">
-                <p className="text-sm text-slate-400">AI summary</p>
-                <p className="mt-3 text-lg font-semibold text-white">{leadSignal?.company ?? "Autonomous signal stream"}</p>
-                <p className="mt-2 text-sm text-slate-400">{leadSignal?.summary ?? "Fresh backend intelligence will appear here."}</p>
-              </div>
-              <div className="rounded-[24px] border border-white/8 bg-white/[0.03] p-5">
-                <p className="text-sm text-slate-400">Competitor intelligence</p>
-                <p className="mt-3 text-lg font-semibold text-white">{leadReport?.title ?? "AI-generated competitor brief"}</p>
-                <p className="mt-2 text-sm text-slate-400">{leadReport?.summary ?? "Generate reports from the platform to preview them here."}</p>
-              </div>
-              <div className="rounded-[24px] border border-white/8 bg-white/[0.03] p-5 md:col-span-2">
-                <p className="text-sm text-slate-400">Live monitoring feed</p>
-                <div className="mt-4 space-y-3">
-                  {(dashboard.recent_activity.length > 0
-                    ? dashboard.recent_activity.map((item) => item.message)
-                    : ["Backend online", "Monitoring tasks syncing", "Reports ready", "Signals waiting"]).map((line) => (
-                    <div key={line} className="flex items-center gap-3 text-sm text-slate-300">
-                      <Waves className="h-4 w-4 animate-pulse-soft text-cyan-200" />
-                      {line}
+            <div className="relative">
+              <Card className="p-8 shadow-xl border-gray-100">
+                <div className="flex items-center justify-between border-b border-gray-100 pb-6">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Preview</p>
+                    <h3 className="mt-1 text-lg font-bold text-gray-900">Portfolio Update</h3>
+                  </div>
+                  <BrainCircuit className="h-5 w-5 text-teal-600" />
+                </div>
+                <div className="mt-6 space-y-4">
+                  {metricCards.slice(0, 3).map(card => (
+                    <div key={card.label} className="flex items-center justify-between rounded-lg border border-gray-50 bg-gray-50/50 p-4">
+                      <span className="text-sm text-gray-600">{card.label}</span>
+                      <span className="font-bold text-gray-900">{card.value}</span>
                     </div>
                   ))}
                 </div>
-              </div>
+              </Card>
             </div>
-          </Card>
+          </div>
         </div>
       </section>
 
-      <section id="intelligence" className="mx-auto max-w-[1480px] px-4 py-14 sm:px-6 xl:px-8">
-        <div className="grid gap-6 lg:grid-cols-2">
-          <Card className="p-8">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Competitor intelligence showcase</p>
-            <h2 className="mt-3 text-3xl font-semibold">Compare markets, not just metrics</h2>
-            <p className="mt-4 text-sm leading-7 text-slate-300">Unify pricing moves, hiring trends, product launches, and market sentiment into side-by-side intelligence briefs.</p>
-          </Card>
-          <Card className="p-8">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-400">CTA</p>
-            <h2 className="mt-3 text-3xl font-semibold">Launch your web intelligence layer</h2>
-            <p className="mt-4 text-sm leading-7 text-slate-300">Designed to feel operationally calm while giving high-leverage teams a live edge on competitive change.</p>
-            <div className="mt-6">
-              <Link href="/dashboard">
-                <Button>
-                  Open Dashboard <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
-          </Card>
+      <footer className="mx-auto max-w-7xl px-6 py-12">
+        <div className="flex flex-col items-center justify-between gap-6 border-t border-gray-100 pt-12 md:flex-row">
+          <p className="text-sm text-gray-400">© 2026 Wasabi Intelligence. All rights reserved.</p>
+          <div className="flex gap-8 text-sm font-medium text-gray-400">
+            <a href="#" className="hover:text-gray-900">Privacy Policy</a>
+            <a href="#" className="hover:text-gray-900">Terms of Service</a>
+          </div>
         </div>
-      </section>
-
-      <footer className="mx-auto flex max-w-[1480px] items-center justify-between px-4 py-10 text-sm text-slate-500 sm:px-6 xl:px-8">
-        <p>SignalOS by Wasabi Intelligence</p>
-        <p>Premium frontend concept for AI web intelligence</p>
       </footer>
     </main>
   );
 }
+

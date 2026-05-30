@@ -6,21 +6,21 @@ export function Card({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("glass-panel rounded-[28px]", className)} {...props} />;
+  return <div className={cn("bg-white border border-gray-200 shadow-sm rounded-xl overflow-hidden", className)} {...props} />;
 }
 
 export function CardHeader({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("flex flex-col gap-2 p-6", className)} {...props} />;
+  return <div className={cn("flex flex-col gap-1.5 p-6", className)} {...props} />;
 }
 
 export function CardTitle({
   className,
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn("text-lg font-semibold text-white", className)} {...props} />;
+  return <h3 className={cn("text-lg font-semibold text-gray-900 leading-none tracking-tight", className)} {...props} />;
 }
 
 export function CardContent({

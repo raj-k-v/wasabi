@@ -11,40 +11,34 @@ const config: Config = {
         card: "var(--card)",
         line: "var(--line)",
         muted: "var(--muted)",
-        accent: "var(--accent)",
+        accent: {
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
+        },
         panel: "var(--panel)",
-        cyan: "#41d1ff",
-        violet: "#8b7cff",
+        teal: {
+          50: "#f0fdfa",
+          100: "#ccfbf1",
+          500: "#14b8a6",
+          600: "#0d9488",
+          700: "#0f766e",
+        },
+        charcoal: {
+          800: "#1f2937",
+          900: "#111827",
+        },
       },
       borderRadius: {
-        xl: "1.25rem",
-        "2xl": "1.75rem",
+        lg: "0.5rem",
+        xl: "0.75rem",
+        "2xl": "1rem",
       },
       boxShadow: {
-        glass: "0 30px 80px rgba(0, 0, 0, 0.28)",
-        glow: "0 0 0 1px rgba(255,255,255,0.06), 0 20px 70px rgba(65, 209, 255, 0.12)",
+        soft: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+        card: "0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)",
       },
-      backgroundImage: {
-        mesh: "radial-gradient(circle at top, rgba(65,209,255,0.18), transparent 30%), radial-gradient(circle at 80% 20%, rgba(139,124,255,0.16), transparent 24%), linear-gradient(180deg, #0b1120 0%, #0f172a 50%, #111827 100%)",
-      },
-      keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-8px)" },
-        },
-        pulseSoft: {
-          "0%, 100%": { opacity: "0.6" },
-          "50%": { opacity: "1" },
-        },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
-      },
-      animation: {
-        float: "float 8s ease-in-out infinite",
-        "pulse-soft": "pulseSoft 2.6s ease-in-out infinite",
-        shimmer: "shimmer 2.4s linear infinite",
+      fontFamily: {
+        sans: ["Inter", "ui-sans-serif", "system-ui"],
       },
     },
   },
@@ -52,3 +46,4 @@ const config: Config = {
 };
 
 export default config;
+
