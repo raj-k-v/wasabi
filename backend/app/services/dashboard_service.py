@@ -3,6 +3,7 @@ from app.services.alert_service import AlertService
 from app.services.competitor_service import CompetitorService
 from app.services.monitoring_service import MonitoringService
 from app.services.report_service import ReportService
+from app.services.store_service import store
 
 
 class DashboardService:
@@ -20,11 +21,11 @@ class DashboardService:
 
     def get_dashboard(self) -> DashboardResponse:
         monitoring_tasks = self.monitoring_service.list_tasks()
-        competitors = self.competitor_service.list_competitors()
-        alerts = self.alert_service.list_alerts(refresh=False)
+        competitors = list(store.competitors.values()) or self.competitor_service.list_competitors()
+        alerts = store.alerts or self.alert_service.list_alerts(refresh=False)
         reports = self.report_service.list_reports()
 
-        recent_activity = [
+        recent_activity = store.activities or [
             DashboardActivity(
                 id=task.id,
                 message=f"{task.target} monitoring is {task.status} for {task.company}.",
@@ -33,7 +34,7 @@ class DashboardService:
             for task in monitoring_tasks[:5]
         ]
 
-        stats = DashboardStat(
+        stats = store.get_stats() if store.competitors else DashboardStat(
             monitored_companies=len({task.company for task in monitoring_tasks}),
             active_alerts=len([alert for alert in alerts if not alert.read]),
             signals_detected=sum(len(report.signals) for report in reports) or len(alerts),

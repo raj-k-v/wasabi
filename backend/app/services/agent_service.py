@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from app.models import SearchRequest, SearchResponse
 from app.services.brightdata_service import BrightDataService
 from app.services.groq_service import GroqService
+from app.services.store_service import store
 
 
 class IntelligenceAgentService:
@@ -32,6 +33,9 @@ class IntelligenceAgentService:
 
         extracted_signals = self.brightdata_service.extract_signals(results)
         intelligence = self.groq_service.analyze_signals(company, results, extracted_signals)
+
+        # Persistence: Save to store so dashboard reflects the search
+        store.add_search_result(company, intelligence.alerts, len(intelligence.signals))
 
         return SearchResponse(
             company=company,
