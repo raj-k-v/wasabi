@@ -24,7 +24,11 @@ class IntelligenceAgentService:
 
         if request.include_page_content:
             for result in results[:2]:
-                self.brightdata_service.scrape_page(result.url)
+                try:
+                    scraped = self.brightdata_service.scrape_page(result.url)
+                    result.snippet = (result.snippet or "") + "\n\nFull Content: " + (scraped.content or "")[:2000]
+                except Exception:
+                    continue
 
         extracted_signals = self.brightdata_service.extract_signals(results)
         intelligence = self.groq_service.analyze_signals(company, results, extracted_signals)
