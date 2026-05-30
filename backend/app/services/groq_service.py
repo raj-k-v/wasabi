@@ -84,6 +84,9 @@ class GroqService:
         if not signals:
             signals = extracted_signals or []
 
+        # Ensure every alert has at least one source URL from results if none were generated
+        fallback_urls = [r.url for r in results[:2]]
+        
         if not alerts and signals:
             alerts = [
                 AlertResponse(
@@ -93,10 +96,14 @@ class GroqService:
                     signal_type=signal.type,
                     summary=signal.message,
                     timestamp=generated_at,
-                    source_urls=signal.evidence,
+                    source_urls=signal.evidence or fallback_urls,
                 )
                 for index, signal in enumerate(signals[:3], start=1)
             ]
+        elif alerts:
+            for alert in alerts:
+                if not alert.source_urls and fallback_urls:
+                    alert.source_urls = fallback_urls
 
         return IntelligencePayload(
             company=company,
