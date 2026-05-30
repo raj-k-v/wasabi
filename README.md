@@ -1,118 +1,111 @@
-# Wasabi
+# 🌿 Wasabi: Autonomous Web Intelligence
 
-Wasabi is an AI-powered web intelligence platform with a Next.js frontend and a FastAPI backend.
+> **Empowering Enterprise Leadership with High-Signal Competitive Intelligence.**
 
-## Stack
+Wasabi is a next-generation intelligence platform that transforms messy web data into actionable strategic insights. Built for a fast-paced hackathon, it leverages advanced AI and real-time web scraping to monitor pricing, hiring, and market signals across any industry.
 
-- Frontend: Next.js 15, React 19, Tailwind CSS, Zustand
-- Backend: FastAPI, Pydantic
-- AI: Groq with `llama3-70b-8192`
-- Data acquisition: Bright Data SERP API
+---
 
-## Repo structure
+## 🚀 Live Demo
+
+- **Frontend:** [https://wasabi-lovat.vercel.app/](https://wasabi-lovat.vercel.app/)
+- **Backend API:** [https://wasabi-backend-l7dd.onrender.com/docs](https://wasabi-backend-l7dd.onrender.com/docs)
+
+---
+
+## ✨ Key Features
+
+- **Autonomous Signal Capture:** Real-time monitoring of pricing, talent, and release notes using Bright Data.
+- **AI Intelligence Synthesis:** Converts raw search fragments into executive briefs using Groq (Llama 3).
+- **Executive Dashboard:** A high-level overview of market movements, active alerts, and strategic summaries.
+- **Deep Intelligence Search:** On-demand research that crawls the web and generates structured intelligence signals.
+- **Fail-Safe Architecture:** Integrated fallback scraping ensuring stability even when premium providers are unavailable.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Framework:** Next.js 15 (React 19)
+- **Styling:** Tailwind CSS
+- **State Management:** Zustand
+- **Animations:** Framer Motion
+- **Deployment:** Vercel
+
+### Backend
+- **Framework:** FastAPI (Python 3.12)
+- **AI Engine:** Groq (Llama3-70b)
+- **Scraping Infrastructure:** Bright Data (SERP & Scraper APIs)
+- **Persistence:** In-memory state management (Production-ready for DB transition)
+- **Deployment:** Render
+
+---
+
+## 📁 Repository Structure
 
 ```text
 wasabi/
-  backend/        FastAPI backend
-  src/            Next.js app source
-  package.json    Frontend scripts and dependencies
+├── src/                # Next.js Frontend
+│   ├── app/            # App Router (Pages & Layouts)
+│   ├── components/     # Reusable UI Components
+│   └── lib/            # API Clients & Utilities
+├── backend/            # FastAPI Backend
+│   ├── app/            # Application Logic
+│   │   ├── routes/     # API Endpoints
+│   │   ├── services/   # Business Logic & Integrations
+│   │   └── models/     # Pydantic Schemas
+│   ├── requirements.txt
+│   └── Procfile        # Deployment configuration
+└── README.md
 ```
 
-## Frontend
+---
 
-The frontend includes:
+## ⚙️ Local Setup
 
-- landing page
-- dashboard
-- search
-- monitoring
-- alerts
-- competitors
-- reports
-- settings
+### Backend
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Create a virtual environment and install dependencies:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+3. Set up your environment variables in `.env`:
+   ```text
+   GROQ_API_KEY=your_key
+   BRIGHTDATA_API_KEY=your_key
+   BRIGHTDATA_SERP_ZONE=serp_api1
+   ```
+4. Run the server:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
 
-Run it locally:
+### Frontend
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Configure environment variables in `.env.local`:
+   ```text
+   NEXT_PUBLIC_BACKEND_URL=http://127.0.0.1:8000
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-npm install
-npm run dev
-```
+---
 
-Open:
+## 🛡️ Security
+This project uses `.env` files for secret management. **Never commit your `.env` files to GitHub.** A `.env.example` is provided for guidance.
 
-```text
-http://localhost:3000
-```
+---
 
-## Backend
-
-The backend keeps a clean `routes -> services -> integrations` architecture and includes:
-
-- typed request and response schemas
-- Groq-powered summary, signal, and report generation
-- Bright Data SERP integration
-- centralized JSON error handling
-- LangGraph-ready placeholder workflow files
-
-Backend setup:
-
-```bash
-cd backend
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-Create `backend/.env` from `backend/.env.example`, then put real secrets in `backend/.env.local`:
-
-```text
-GROQ_API_KEY=
-BRIGHTDATA_API_KEY=
-BRIGHTDATA_SERP_URL=https://api.brightdata.com/request
-BRIGHTDATA_SERP_ZONE=
-BRIGHTDATA_SCRAPER_URL=
-```
-
-Run the backend:
-
-```bash
-uvicorn app.main:app --reload
-```
-
-Open:
-
-```text
-http://127.0.0.1:8000/docs
-```
-
-See the backend-specific guide in [backend/README.md](/C:/Users/Raj/Desktop/t/wasabi/backend/README.md).
-
-## Current status
-
-- The backend search flow is wired to real Groq and Bright Data SERP calls.
-- The frontend platform routes are connected to the backend.
-- The old mock-data module is no longer used in the app flow.
-- Bright Data page scraping is not finished until a proper Web Unlocker API setup is added.
-
-## Recommended local workflow
-
-Run both apps in separate terminals:
-
-Terminal 1:
-
-```bash
-cd backend
-uvicorn app.main:app --reload
-```
-
-Terminal 2:
-
-```bash
-npm run dev
-```
-
-## Notes
-
-- Do not commit real API keys.
-- Rotate any secrets that were exposed in screenshots or chat.
-- Keep local backend secrets in `backend/.env.local`.
+## 🏆 Hackathon Credits
+Developed with ❤️ by **Anish** & **Raj**.
+🌿 *Wasabi: Stay Sharp.*
