@@ -11,31 +11,41 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function AlertCard({ alert, index = 0 }: { alert: AlertItem; index?: number }) {
+  const content = (
+    <Card className="group p-5 transition-shadow hover:shadow-md border-gray-100 cursor-pointer">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start gap-4">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-xs font-bold text-gray-900">
+            {alert.companyMark}
+          </div>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-semibold text-gray-900">{alert.company}</span>
+              <span className="text-[10px] text-gray-400">•</span>
+              <span className="text-[10px] uppercase font-bold tracking-wider text-gray-400">{alert.timestamp}</span>
+            </div>
+            <p className="mt-1 text-sm font-medium text-gray-800 leading-snug">{alert.title}</p>
+            <p className="mt-2 text-xs text-gray-500 line-clamp-2 leading-relaxed">{alert.summary}</p>
+          </div>
+        </div>
+        <SeverityBadge severity={alert.severity} />
+      </div>
+    </Card>
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.04 }}
     >
-      <Card className="group p-5 transition-shadow hover:shadow-md border-gray-100">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-xs font-bold text-gray-900">
-              {alert.companyMark}
-            </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-gray-900">{alert.company}</span>
-                <span className="text-[10px] text-gray-400">•</span>
-                <span className="text-[10px] uppercase font-bold tracking-wider text-gray-400">{alert.timestamp}</span>
-              </div>
-              <p className="mt-1 text-sm font-medium text-gray-800 leading-snug">{alert.title}</p>
-              <p className="mt-2 text-xs text-gray-500 line-clamp-2 leading-relaxed">{alert.summary}</p>
-            </div>
-          </div>
-          <SeverityBadge severity={alert.severity} />
-        </div>
-      </Card>
+      {alert.source && alert.source !== "AI Intelligence" ? (
+        <a href={alert.source} target="_blank" rel="noreferrer" className="block decoration-transparent">
+          {content}
+        </a>
+      ) : (
+        content
+      )}
     </motion.div>
   );
 }

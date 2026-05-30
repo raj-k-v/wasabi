@@ -98,12 +98,22 @@ export function LiveSearchResults({ query }: { query: string }) {
       <h2 className="mt-2 text-2xl font-semibold">{result.company}</h2>
       <p className="mt-4 text-sm leading-7 text-slate-300">{result.summary}</p>
       <div className="mt-5 space-y-3">
-        {generatedAlerts.map((alert) => (
-          <div key={alert.id} className="rounded-2xl border border-white/6 bg-white/[0.03] p-4">
-            <p className="text-sm font-medium text-white">{alert.title}</p>
-            <p className="mt-2 text-sm text-slate-400">{alert.summary}</p>
-          </div>
-        ))}
+        {generatedAlerts.map((alert) => {
+          const content = (
+            <div className="rounded-2xl border border-white/6 bg-white/[0.03] p-4 hover:border-cyan/20 transition cursor-pointer">
+              <p className="text-sm font-medium text-white">{alert.title}</p>
+              <p className="mt-2 text-sm text-slate-400">{alert.summary}</p>
+            </div>
+          );
+
+          return alert.source && alert.source !== "AI Intelligence" ? (
+            <a key={alert.id} href={alert.source} target="_blank" rel="noreferrer" className="block decoration-transparent">
+              {content}
+            </a>
+          ) : (
+            <div key={alert.id}>{content}</div>
+          );
+        })}
       </div>
       <div className="mt-5 space-y-3">
         {result.results.map((item) => (
