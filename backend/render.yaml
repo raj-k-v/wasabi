@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: wasabi-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: APP_NAME
+        value: Wasabi Backend
+      - key: APP_ENV
+        value: production
+      - key: FRONTEND_ORIGIN
+        value: https://wasabi-gamma.vercel.app
+      - key: BRIGHTDATA_SERP_URL
+        value: https://api.brightdata.com/request
+      - key: BRIGHTDATA_SCRAPER_URL
+        value: https://api.brightdata.com/request
+      - key: REQUEST_TIMEOUT_SECONDS
+        value: 12
+      - key: MAX_RETRIES
+        value: 1
+      - key: GROQ_MODEL
+        value: llama3-70b-8192

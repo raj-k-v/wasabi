@@ -20,6 +20,7 @@ class Settings:
     brightdata_serp_url: str | None
     brightdata_serp_zone: str | None
     brightdata_scraper_url: str | None
+    brightdata_scraper_zone: str | None
     request_timeout_seconds: float = 12.0
     max_retries: int = 1
     groq_model: str = "llama3-70b-8192"
@@ -40,6 +41,7 @@ def get_settings() -> Settings:
         brightdata_serp_url=os.getenv("BRIGHTDATA_SERP_URL"),
         brightdata_serp_zone=os.getenv("BRIGHTDATA_SERP_ZONE"),
         brightdata_scraper_url=os.getenv("BRIGHTDATA_SCRAPER_URL"),
+        brightdata_scraper_zone=os.getenv("BRIGHTDATA_SCRAPER_ZONE"),
         request_timeout_seconds=float(os.getenv("REQUEST_TIMEOUT_SECONDS", "12")),
         max_retries=int(os.getenv("MAX_RETRIES", "1")),
         groq_model=os.getenv("GROQ_MODEL", "llama3-70b-8192"),
