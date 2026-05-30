@@ -5,13 +5,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --background: #fbfbfb; /* Soft white */
-  --foreground: #020617; /* Slate 950 - Deeper Charcoal */
-  --card: #ffffff;
-  --panel: #f3f4f6; /* Warm Gray 100 */
-  --line: #e2e8f0; /* Slate 200 */
-  --muted: #475569; /* Slate 600 - Deeper Gray */
-  --accent: #0d9488; /* Teal 600 */
+  --background: #000000; /* Pure Black */
+  --foreground: #f8fafc; /* Slate 50 */
+  --card: #0a0a0a; /* High-contrast card */
+  --panel: #111111; /* Slightly lighter panel */
+  --line: #1f2937; /* Gray 800 */
+  --muted: #cbd5e1; /* Slate 300 - Brighter for better contrast */
+  --accent: #14b8a6; /* Teal 500 - Vibrant */
   --accent-foreground: #ffffff;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -36,16 +36,16 @@ body {
 
 @layer base {
   h1 {
-    @apply text-[40px] font-bold tracking-tight text-gray-900;
+    @apply text-[40px] font-bold tracking-tight text-foreground;
   }
   h2 {
-    @apply text-[28px] font-semibold tracking-tight text-gray-900;
+    @apply text-[28px] font-semibold tracking-tight text-foreground;
   }
   h3 {
-    @apply text-[18px] font-semibold text-gray-900;
+    @apply text-[18px] font-semibold text-foreground;
   }
   p {
-    @apply text-base text-gray-600;
+    @apply text-base text-muted;
   }
 }
 

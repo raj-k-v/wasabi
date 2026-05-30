@@ -13,7 +13,7 @@ export function ActivityTimeline({ timeline }: { timeline: TimelineEvent[] }) {
           <div key={item.time} className="flex gap-4">
             <div className="flex flex-col items-center">
               <div className="h-2.5 w-2.5 rounded-full bg-cyan" />
-              <div className="mt-2 h-full w-px bg-white/10" />
+              <div className="mt-2 h-full w-px bg-card/10" />
             </div>
             <div className="pb-2">
               <div className="flex flex-wrap items-center gap-2">

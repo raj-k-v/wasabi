@@ -52,7 +52,7 @@ export function SearchBar({
       </div>
       
       {focused && filteredSuggestions.length > 0 && (
-        <Card className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-50 overflow-hidden border border-slate-200 bg-white p-1 shadow-2xl">
+        <Card className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-50 overflow-hidden border border-slate-200 bg-card p-1 shadow-2xl">
           <div className="px-3 py-2">
             <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Live Suggestions</p>
           </div>
@@ -67,8 +67,8 @@ export function SearchBar({
                 className="flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm transition-colors hover:bg-slate-50"
               >
                 <div className="flex items-center gap-3">
-                  <div className="h-1.5 w-1.5 rounded-full bg-teal-500" />
-                  <span className="font-semibold text-slate-900">{item.name}</span>
+                  <div className="h-1.5 w-1.5 rounded-full bg-teal-900/300" />
+                  <span className="font-semibold text-foreground">{item.name}</span>
                 </div>
                 <span className="text-xs text-slate-400">{item.category}</span>
               </button>

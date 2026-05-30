@@ -26,7 +26,7 @@ export default async function AlertsPage() {
               ["Medium", counts.medium.toString()],
               ["Low", counts.low.toString()],
             ].map(([label, value]) => (
-              <div key={label} className="rounded-2xl border border-white/6 bg-white/[0.03] p-4">
+              <div key={label} className="rounded-2xl border border-white/6 bg-card/[0.03] p-4">
                 <p className="text-sm text-slate-400">{label}</p>
                 <p className="mt-2 text-2xl font-semibold text-white">{value}</p>
               </div>

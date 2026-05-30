@@ -12,8 +12,8 @@ const buttonVariants = cva(
         default:
           "bg-teal-600 text-white shadow-sm hover:bg-teal-700 active:bg-teal-800",
         secondary:
-          "border border-gray-200 bg-white text-gray-900 shadow-sm hover:bg-gray-50 active:bg-gray-100",
-        ghost: "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+          "border border-line bg-card text-foreground shadow-sm hover:bg-panel active:bg-line/50",
+        ghost: "text-muted hover:bg-panel hover:text-foreground",
       },
       size: {
         default: "h-12 px-6",

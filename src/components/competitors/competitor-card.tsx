@@ -19,7 +19,7 @@ export function CompetitorCard({ item }: { item: CompetitorCardItem }) {
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-white/6 bg-white/[0.03] p-4">
+    <div className="rounded-2xl border border-white/6 bg-card/[0.03] p-4">
       <p className="text-xs uppercase tracking-[0.18em] text-slate-500">{label}</p>
       <p className="mt-2 text-sm font-medium text-white">{value}</p>
     </div>

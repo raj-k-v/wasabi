@@ -99,7 +99,7 @@ export function LiveSearchResults({ query }: { query: string }) {
       <p className="mt-4 text-sm leading-7 text-slate-300">{result.summary}</p>
       <div className="mt-5 space-y-3">
         {generatedAlerts.map((alert) => (
-          <div key={alert.id} className="rounded-2xl border border-white/6 bg-white/[0.03] p-4">
+          <div key={alert.id} className="rounded-2xl border border-white/6 bg-card/[0.03] p-4">
             <p className="text-sm font-medium text-white">{alert.title}</p>
             <p className="mt-2 text-sm text-slate-400">{alert.summary}</p>
           </div>
@@ -112,7 +112,7 @@ export function LiveSearchResults({ query }: { query: string }) {
             href={item.url}
             target="_blank"
             rel="noreferrer"
-            className="block rounded-2xl border border-white/6 bg-white/[0.03] p-4 transition hover:border-cyan/20"
+            className="block rounded-2xl border border-white/6 bg-card/[0.03] p-4 transition hover:border-cyan/20"
           >
             <p className="font-medium text-white">{item.title}</p>
             <p className="mt-1 text-sm text-slate-400">{item.snippet ?? item.domain ?? item.url}</p>

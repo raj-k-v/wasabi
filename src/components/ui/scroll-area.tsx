@@ -18,7 +18,7 @@ export function ScrollArea({
         orientation="vertical"
         className="flex w-2.5 touch-none select-none p-[1px]"
       >
-        <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-white/10" />
+        <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-card/10" />
       </ScrollAreaPrimitive.ScrollAreaScrollbar>
     </ScrollAreaPrimitive.Root>
   );

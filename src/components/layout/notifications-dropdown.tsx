@@ -28,7 +28,7 @@ export function NotificationsDropdown() {
           </div>
           <div className="space-y-2">
             {alerts.slice(0, 3).map((alert) => (
-              <div key={alert.id} className="rounded-2xl border border-white/6 bg-white/[0.03] p-3">
+              <div key={alert.id} className="rounded-2xl border border-white/6 bg-card/[0.03] p-3">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-white">{alert.company}</p>
                   <Badge variant={alert.severity}>{alert.severity}</Badge>

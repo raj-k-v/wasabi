@@ -31,9 +31,9 @@ export function MonitoringFeed() {
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.08 }}
-              className="flex items-start gap-4 rounded-2xl border border-white/6 bg-white/[0.03] p-4"
+              className="flex items-start gap-4 rounded-2xl border border-white/6 bg-card/[0.03] p-4"
             >
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
+              <div className="rounded-2xl border border-white/10 bg-card/5 p-3">
                 <Icon className={`h-4 w-4 ${event.status === "signal" ? "animate-pulse-soft text-cyan-200" : "text-slate-200"}`} />
               </div>
               <div className="flex-1">
