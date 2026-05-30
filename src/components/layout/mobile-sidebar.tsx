@@ -25,7 +25,7 @@ export function MobileSidebar() {
                 onClick={() => toggleMobileSidebar(false)}
                 className={cn(
                   "flex items-center gap-3 rounded-2xl px-4 py-3 text-sm transition",
-                  active ? "bg-white/10 text-white" : "text-slate-300 hover:bg-white/5",
+                  active ? "bg-card/10 text-white" : "text-slate-300 hover:bg-card/5",
                 )}
               >
                 <item.icon className="h-4 w-4" />

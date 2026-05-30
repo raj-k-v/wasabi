@@ -10,7 +10,7 @@ export function ComparisonTable({ rows }: { rows: ComparisonRow[] }) {
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full text-left text-sm">
-          <thead className="bg-white/[0.03] text-slate-400">
+          <thead className="bg-card/[0.03] text-slate-400">
             <tr>
               <th className="px-6 py-4 font-medium">Company</th>
               <th className="px-6 py-4 font-medium">Pricing</th>

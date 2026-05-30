@@ -100,7 +100,7 @@ export function LiveSearchResults({ query }: { query: string }) {
       <div className="mt-5 space-y-3">
         {generatedAlerts.map((alert) => {
           const content = (
-            <div className="rounded-2xl border border-white/6 bg-white/[0.03] p-4 hover:border-cyan/20 transition cursor-pointer">
+            <div className="rounded-2xl border border-white/6 bg-card/[0.03] p-4 hover:border-cyan/20 transition cursor-pointer">
               <p className="text-sm font-medium text-white">{alert.title}</p>
               <p className="mt-2 text-sm text-slate-400">{alert.summary}</p>
             </div>
@@ -122,7 +122,7 @@ export function LiveSearchResults({ query }: { query: string }) {
             href={item.url}
             target="_blank"
             rel="noreferrer"
-            className="block rounded-2xl border border-white/6 bg-white/[0.03] p-4 transition hover:border-cyan/20"
+            className="block rounded-2xl border border-white/6 bg-card/[0.03] p-4 transition hover:border-cyan/20"
           >
             <p className="font-medium text-white">{item.title}</p>
             <p className="mt-1 text-sm text-slate-400">{item.snippet ?? item.domain ?? item.url}</p>

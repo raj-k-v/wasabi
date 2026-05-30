@@ -44,18 +44,18 @@ export default async function LandingPage() {
     reportsResult.status === "rejected";
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-background">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-8">
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600 text-white">
             <Sparkles className="h-5 w-5" />
           </div>
-          <span className="text-xl font-bold tracking-tight text-gray-900">Wasabi</span>
+          <span className="text-xl font-bold tracking-tight text-foreground">Wasabi</span>
         </div>
-        <div className="hidden items-center gap-8 text-sm font-medium text-gray-500 md:flex">
-          <a href="#platform" className="hover:text-gray-900">Platform</a>
-          <a href="#intelligence" className="hover:text-gray-900">Intelligence</a>
-          <a href="#teams" className="hover:text-gray-900">Teams</a>
+        <div className="hidden items-center gap-8 text-sm font-medium text-muted md:flex">
+          <a href="#platform" className="hover:text-foreground">Platform</a>
+          <a href="#intelligence" className="hover:text-foreground">Intelligence</a>
+          <a href="#teams" className="hover:text-foreground">Teams</a>
         </div>
         <Link href="/dashboard">
           <Button variant="secondary" size="sm">Log In</Button>
@@ -65,14 +65,14 @@ export default async function LandingPage() {
       {/* Hero Section */}
       <section className="relative mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div className="max-w-3xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-teal-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-teal-700">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-teal-900/40 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-teal-400">
             Market Intelligence for Enterprise
           </div>
-          <h1 className="text-5xl font-bold leading-[1.1] text-gray-900 md:text-7xl">
+          <h1 className="text-5xl font-bold leading-[1.1] text-foreground md:text-7xl">
             Autonomous web intelligence <br />
-            <span className="text-teal-600">for the live market.</span>
+            <span className="text-teal-500">for the live market.</span>
           </h1>
-          <p className="mt-8 text-lg text-gray-500 leading-relaxed max-w-2xl">
+          <p className="mt-8 text-lg text-muted leading-relaxed max-w-2xl">
             Monitor pricing, hiring, and strategic market signals in real time. 
             Designed for investors and leadership teams who require a high-signal edge.
           </p>
@@ -86,21 +86,21 @@ export default async function LandingPage() {
 
         <div className="mt-24 grid gap-8 sm:grid-cols-3">
           {landingStats.map((item) => (
-            <div key={item.label} className="border-l border-gray-100 pl-8 py-2">
-              <p className="text-4xl font-bold text-gray-900">{item.value}</p>
-              <p className="mt-2 text-sm font-medium text-gray-400 uppercase tracking-widest">{item.label}</p>
+            <div key={item.label} className="border-l border-line pl-8 py-2">
+              <p className="text-4xl font-bold text-foreground">{item.value}</p>
+              <p className="mt-2 text-sm font-medium text-muted uppercase tracking-widest">{item.label}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Feature Section */}
-      <section id="platform" className="border-t border-gray-100 bg-gray-50/50 py-24">
+      <section id="platform" className="border-t border-line bg-panel/50 py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900">High-leverage market monitoring.</h2>
-              <p className="mt-4 text-gray-500 leading-relaxed">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground">High-leverage market monitoring.</h2>
+              <p className="mt-4 text-muted leading-relaxed">
                 Agents observe structured and unstructured changes, rank relevance, and route signals into a single premium intelligence workspace.
               </p>
               <div className="mt-10 space-y-6">
@@ -110,31 +110,31 @@ export default async function LandingPage() {
                   { title: "Strategic Clarity", desc: "Calm, high-signal views designed for leadership." }
                 ].map((feature) => (
                   <div key={feature.title} className="flex gap-4">
-                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-teal-100 text-teal-600">
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-teal-900/30 text-teal-500">
                       <Waves className="h-4 w-4" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-900">{feature.title}</h3>
-                      <p className="text-sm text-gray-500">{feature.desc}</p>
+                      <h3 className="font-bold text-foreground">{feature.title}</h3>
+                      <p className="text-sm text-muted">{feature.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             <div className="relative">
-              <Card className="p-8 shadow-xl border-gray-100">
-                <div className="flex items-center justify-between border-b border-gray-100 pb-6">
+              <Card className="p-8 shadow-xl border-line">
+                <div className="flex items-center justify-between border-b border-line pb-6">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Preview</p>
-                    <h3 className="mt-1 text-lg font-bold text-gray-900">Portfolio Update</h3>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-muted">Preview</p>
+                    <h3 className="mt-1 text-lg font-bold text-foreground">Portfolio Update</h3>
                   </div>
-                  <BrainCircuit className="h-5 w-5 text-teal-600" />
+                  <BrainCircuit className="h-5 w-5 text-teal-500" />
                 </div>
                 <div className="mt-6 space-y-4">
                   {metricCards.slice(0, 3).map(card => (
-                    <div key={card.label} className="flex items-center justify-between rounded-lg border border-gray-50 bg-gray-50/50 p-4">
-                      <span className="text-sm text-gray-600">{card.label}</span>
-                      <span className="font-bold text-gray-900">{card.value}</span>
+                    <div key={card.label} className="flex items-center justify-between rounded-lg border border-line bg-panel/50 p-4">
+                      <span className="text-sm text-muted">{card.label}</span>
+                      <span className="font-bold text-foreground">{card.value}</span>
                     </div>
                   ))}
                 </div>
@@ -145,11 +145,11 @@ export default async function LandingPage() {
       </section>
 
       <footer className="mx-auto max-w-7xl px-6 py-12">
-        <div className="flex flex-col items-center justify-between gap-6 border-t border-gray-100 pt-12 md:flex-row">
-          <p className="text-sm text-gray-400">© 2026 Wasabi Intelligence. All rights reserved.</p>
-          <div className="flex gap-8 text-sm font-medium text-gray-400">
-            <a href="#" className="hover:text-gray-900">Privacy Policy</a>
-            <a href="#" className="hover:text-gray-900">Terms of Service</a>
+        <div className="flex flex-col items-center justify-between gap-6 border-t border-line pt-12 md:flex-row">
+          <p className="text-sm text-muted">© 2026 Wasabi Intelligence. All rights reserved.</p>
+          <div className="flex gap-8 text-sm font-medium text-muted">
+            <a href="#" className="hover:text-foreground">Privacy Policy</a>
+            <a href="#" className="hover:text-foreground">Terms of Service</a>
           </div>
         </div>
       </footer>

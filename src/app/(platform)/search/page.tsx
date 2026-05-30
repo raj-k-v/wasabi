@@ -31,7 +31,7 @@ export default async function SearchPage({
           <h1 className="mt-2 text-3xl font-semibold">Search companies and markets</h1>
           <div className="mt-5 space-y-3">
             {suggestions.map((item) => (
-              <div key={item.name} className="rounded-2xl border border-white/6 bg-white/[0.03] px-4 py-4">
+              <div key={item.name} className="rounded-2xl border border-white/6 bg-card/[0.03] px-4 py-4">
                 <p className="font-medium text-white">{item.name}</p>
                 <p className="mt-1 text-sm text-slate-400">{item.category}</p>
               </div>

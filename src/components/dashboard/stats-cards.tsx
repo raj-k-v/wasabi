@@ -30,14 +30,14 @@ export function StatsCards({ cards, className }: { cards: MetricCardViewModel[];
           >
             <Card className="p-6">
               <div className="flex items-center justify-between">
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">{card.label}</p>
-                <Icon className="h-4 w-4 text-gray-400" />
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted/60">{card.label}</p>
+                <Icon className="h-4 w-4 text-muted/60" />
               </div>
               <div className="mt-4 flex items-end justify-between">
                 <div>
-                  <p className="text-3xl font-bold text-gray-900">{card.value}</p>
-                  <p className={cn("mt-1 text-xs font-medium", card.trend.startsWith("+") ? "text-teal-600" : "text-rose-600")}>
-                    {card.trend} <span className="text-gray-400 font-normal ml-0.5">from last month</span>
+                  <p className="text-3xl font-bold text-foreground">{card.value}</p>
+                  <p className={cn("mt-1 text-xs font-medium", card.trend.startsWith("+") ? "text-teal-400" : "text-rose-400")}>
+                    {card.trend} <span className="text-muted/60 font-normal ml-0.5">from last month</span>
                   </p>
                 </div>
                 <div className="h-10 w-20">

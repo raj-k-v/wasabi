@@ -18,7 +18,7 @@ export function AlertFilters() {
             "rounded-full border px-3 py-2 text-xs uppercase tracking-[0.18em] transition",
             selectedAlertFilter === filter
               ? "border-cyan/30 bg-cyan/10 text-cyan-100"
-              : "border-white/10 bg-white/5 text-slate-400 hover:text-white",
+              : "border-white/10 bg-card/5 text-slate-400 hover:text-white",
           )}
         >
           {filter}
